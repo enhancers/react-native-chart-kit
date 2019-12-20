@@ -211,8 +211,8 @@ export interface BarChartProps {
   height: number;
   fromZero?: boolean;
   withInnerLines?: boolean;
-  yAxisLabel: string;
-  yAxisSuffix: string;
+  yAxisLabel?: string;
+  yAxisSuffix?: string;
   chartConfig: ChartConfig;
   style?: ViewStyle;
   horizontalLabelRotation?: number;
