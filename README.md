@@ -1,10 +1,8 @@
-If you're looking to **build a website or a cross-platform mobile app** – we will be happy to help you! Send a note to clients@ui1.io and we will be in touch with you shortly.
-
 ![Chart Kit](https://i.imgur.com/Idp4WIX.jpg)
 
 [📲See example app](https://github.com/indiespirit/react-native-chart-kit-example)
 
-# React Native Chart Kit Documentation
+# React Native Chart Kit Documentation (outdated)
 
 ## Import components
 
@@ -19,8 +17,8 @@ import {
   PieChart,
   ProgressChart,
   ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
+  StackedBarChart,
+} from 'react-native-chart-kit';
 ```
 
 ## Quick Example
@@ -30,7 +28,7 @@ import {
   <Text>Bezier Line Chart</Text>
   <LineChart
     data={{
-      labels: ["January", "February", "March", "April", "May", "June"],
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
       datasets: [
         {
           data: [
@@ -39,35 +37,35 @@ import {
             Math.random() * 100,
             Math.random() * 100,
             Math.random() * 100,
-            Math.random() * 100
-          ]
-        }
-      ]
+            Math.random() * 100,
+          ],
+        },
+      ],
     }}
-    width={Dimensions.get("window").width} // from react-native
+    width={Dimensions.get('window').width} // from react-native
     height={220}
-    yAxisLabel={"$"}
-    yAxisSuffix={"k"}
+    yAxisLabel={'$'}
+    yAxisSuffix={'k'}
     chartConfig={{
-      backgroundColor: "#e26a00",
-      backgroundGradientFrom: "#fb8c00",
-      backgroundGradientTo: "#ffa726",
+      backgroundColor: '#e26a00',
+      backgroundGradientFrom: '#fb8c00',
+      backgroundGradientTo: '#ffa726',
       decimalPlaces: 2, // optional, defaults to 2dp
       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       style: {
-        borderRadius: 16
+        borderRadius: 16,
       },
       propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#ffa726"
-      }
+        r: '6',
+        strokeWidth: '2',
+        stroke: '#ffa726',
+      },
     }}
     bezier
     style={{
       marginVertical: 8,
-      borderRadius: 16
+      borderRadius: 16,
     }}
   />
 </View>
@@ -79,13 +77,13 @@ Define a chart style object with following properies as such:
 
 ```js
 const chartConfig = {
-  backgroundGradientFrom: "#1E2923",
+  backgroundGradientFrom: '#1E2923',
   backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "#08130D",
+  backgroundGradientTo: '#08130D',
   backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
   strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5
+  barPercentage: 0.5,
 };
 ```
 
@@ -109,8 +107,8 @@ const chartConfig = {
 To render a responsive chart, use `Dimensions` react-native library to get the width of the screen of your device like such
 
 ```js
-import { Dimensions } from "react-native";
-const screenWidth = Dimensions.get("window").width;
+import {Dimensions} from 'react-native';
+const screenWidth = Dimensions.get('window').width;
 ```
 
 ## Line Chart
@@ -119,15 +117,15 @@ const screenWidth = Dimensions.get("window").width;
 
 ```js
 const data = {
-  labels: ["January", "February", "March", "April", "May", "June"],
+  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
   datasets: [
     {
       data: [20, 45, 28, 80, 99, 43],
       color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-      strokeWidth: 2 // optional
-    }
+      strokeWidth: 2, // optional
+    },
   ],
-  legend: ["Rainy Days", "Sunny Days", "Snowy Days"] // optional
+  legend: ['Rainy Days', 'Sunny Days', 'Snowy Days'], // optional
 };
 ```
 
@@ -140,34 +138,34 @@ const data = {
 />
 ```
 
-| Property                | Type                    | Description                                                                                                                                                                                                         |
-| ----------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| data                    | Object                  | Data for the chart - see example above                                                                                                                                                                              |
-| width                   | Number                  | Width of the chart, use 'Dimensions' library to get the width of your screen for responsive                                                                                                                         |
-| height                  | Number                  | Height of the chart                                                                                                                                                                                                 |
-| withDots                | boolean                 | Show dots on the line - default: True                                                                                                                                                                               |
-| withShadow              | boolean                 | Show shadow for line - default: True                                                                                                                                                                                |
-| withInnerLines          | boolean                 | Show inner dashed lines - default: True                                                                                                                                                                             |
-| withOuterLines          | boolean                 | Show outer dashed lines - default: True                                                                                                                                                                             |
-| withVerticalLabels      | boolean                 | Show vertical labels - default: True                                                                                                                                                                                |
-| withHorizontalLabels    | boolean                 | Show horizontal labels - default: True                                                                                                                                                                              |
-| fromZero                | boolean                 | Render charts from 0 not from the minimum value. - default: False                                                                                                                                                   |
-| yAxisLabel              | string                  | Prepend text to horizontal labels -- default: ''                                                                                                                                                                    |
-| yAxisSuffix             | string                  | Append text to horizontal labels -- default: ''                                                                                                                                                                     |
-| xAxisLabel              | string                  | Prepend text to vertical labels -- default: ''                                                                                                                                                                      |
-| chartConfig             | Object                  | Configuration object for the chart, see example config object above                                                                                                                                                 |
+| Property                | Type                    | Description                                                                                                                                                                                                                    |
+| ----------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| data                    | Object                  | Data for the chart - see example above                                                                                                                                                                                         |
+| width                   | Number                  | Width of the chart, use 'Dimensions' library to get the width of your screen for responsive                                                                                                                                    |
+| height                  | Number                  | Height of the chart                                                                                                                                                                                                            |
+| withDots                | boolean                 | Show dots on the line - default: True                                                                                                                                                                                          |
+| withShadow              | boolean                 | Show shadow for line - default: True                                                                                                                                                                                           |
+| withInnerLines          | boolean                 | Show inner dashed lines - default: True                                                                                                                                                                                        |
+| withOuterLines          | boolean                 | Show outer dashed lines - default: True                                                                                                                                                                                        |
+| withVerticalLabels      | boolean                 | Show vertical labels - default: True                                                                                                                                                                                           |
+| withHorizontalLabels    | boolean                 | Show horizontal labels - default: True                                                                                                                                                                                         |
+| fromZero                | boolean                 | Render charts from 0 not from the minimum value. - default: False                                                                                                                                                              |
+| yAxisLabel              | string                  | Prepend text to horizontal labels -- default: ''                                                                                                                                                                               |
+| yAxisSuffix             | string                  | Append text to horizontal labels -- default: ''                                                                                                                                                                                |
+| xAxisLabel              | string                  | Prepend text to vertical labels -- default: ''                                                                                                                                                                                 |
+| chartConfig             | Object                  | Configuration object for the chart, see example config object above                                                                                                                                                            |
 | decorator               | Function                | This function takes a [whole bunch](https://github.com/indiespirit/react-native-chart-kit/blob/master/src/line-chart/line-chart.js#L292) of stuff and can render extra elements, such as data point info or additional markup. |
-| onDataPointClick        | Function                | Callback that takes `{value, dataset, getColor}`                                                                                                                                                                    |
-| horizontalLabelRotation | number (degree)         | Rotation angle of the horizontal labels - default 0                                                                                                                                                                 |
-| verticalLabelRotation   | number (degree)         | Rotation angle of the vertical labels - default 0                                                                                                                                                                   |
-| getDotColor             | function => string      | Defines the dot color function that is used to calculate colors of dots in a line chart and takes `(dataPoint, dataPointIndex)`                                                                                     |
-| renderDotContent        | Function                | Render additional content for the dot. Takes `({x, y, index})` as arguments.                                                                                                                                        |
-| yLabelsOffset           | number                  | Offset for Y axis labels                                                                                                                                                                                            |
-| xLabelsOffset           | number                  | Offset for X axis labels                                                                                                                                                                                            |
-| hidePointsAtIndex       | number[]                | Indices of the data points you don't want to display                                                                                                                                                                |
-| formatYLabel            | Function                | This function change the format of the display value of the Y label. Takes the Y value as argument and should return the desirable string.                                                                          |
-| formatXLabel            | Function                | This function change the format of the display value of the X label. Takes the X value as argument and should return the desirable string.                                                                          |
-| getDotProps             | (value, index) => props | This is an alternative to chartConfig's propsForDots                                                                                                                                                                |
+| onDataPointClick        | Function                | Callback that takes `{value, dataset, getColor}`                                                                                                                                                                               |
+| horizontalLabelRotation | number (degree)         | Rotation angle of the horizontal labels - default 0                                                                                                                                                                            |
+| verticalLabelRotation   | number (degree)         | Rotation angle of the vertical labels - default 0                                                                                                                                                                              |
+| getDotColor             | function => string      | Defines the dot color function that is used to calculate colors of dots in a line chart and takes `(dataPoint, dataPointIndex)`                                                                                                |
+| renderDotContent        | Function                | Render additional content for the dot. Takes `({x, y, index})` as arguments.                                                                                                                                                   |
+| yLabelsOffset           | number                  | Offset for Y axis labels                                                                                                                                                                                                       |
+| xLabelsOffset           | number                  | Offset for X axis labels                                                                                                                                                                                                       |
+| hidePointsAtIndex       | number[]                | Indices of the data points you don't want to display                                                                                                                                                                           |
+| formatYLabel            | Function                | This function change the format of the display value of the Y label. Takes the Y value as argument and should return the desirable string.                                                                                     |
+| formatXLabel            | Function                | This function change the format of the display value of the X label. Takes the X value as argument and should return the desirable string.                                                                                     |
+| getDotProps             | (value, index) => props | This is an alternative to chartConfig's propsForDots                                                                                                                                                                           |
 
 ## Bezier Line Chart
 
@@ -195,8 +193,8 @@ const data = {
 ```js
 // each value represents a goal ring in Progress chart
 const data = {
-  labels: ["Swim", "Bike", "Run"], // optional
-  data: [0.4, 0.6, 0.8]
+  labels: ['Swim', 'Bike', 'Run'], // optional
+  data: [0.4, 0.6, 0.8],
 };
 ```
 
@@ -224,12 +222,12 @@ const data = {
 
 ```js
 const data = {
-  labels: ["January", "February", "March", "April", "May", "June"],
+  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
   datasets: [
     {
-      data: [20, 45, 28, 80, 99, 43]
-    }
-  ]
+      data: [20, 45, 28, 80, 99, 43],
+    },
+  ],
 };
 ```
 
@@ -259,10 +257,13 @@ yAxisLabel={'$'} chartConfig={chartConfig} verticalLabelRotation={30} />
 
 ```js
 const data = {
-  labels: ["Test1", "Test2"],
-  legend: ["L1", "L2", "L3"],
-  data: [[60, 60, 60], [30, 30, 60]],
-  barColors: ["#dfe4ea", "#ced6e0", "#a4b0be"]
+  labels: ['Test1', 'Test2'],
+  legend: ['L1', 'L2', 'L3'],
+  data: [
+    [60, 60, 60],
+    [30, 30, 60],
+  ],
+  barColors: ['#dfe4ea', '#ced6e0', '#a4b0be'],
 };
 ```
 
@@ -298,40 +299,40 @@ const data = {
 ```js
 const data = [
   {
-    name: "Seoul",
+    name: 'Seoul',
     population: 21500000,
-    color: "rgba(131, 167, 234, 1)",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    color: 'rgba(131, 167, 234, 1)',
+    legendFontColor: '#7F7F7F',
+    legendFontSize: 15,
   },
   {
-    name: "Toronto",
+    name: 'Toronto',
     population: 2800000,
-    color: "#F00",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    color: '#F00',
+    legendFontColor: '#7F7F7F',
+    legendFontSize: 15,
   },
   {
-    name: "Beijing",
+    name: 'Beijing',
     population: 527612,
-    color: "red",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    color: 'red',
+    legendFontColor: '#7F7F7F',
+    legendFontSize: 15,
   },
   {
-    name: "New York",
+    name: 'New York',
     population: 8538000,
-    color: "#ffffff",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    color: '#ffffff',
+    legendFontColor: '#7F7F7F',
+    legendFontSize: 15,
   },
   {
-    name: "Moscow",
+    name: 'Moscow',
     population: 11920000,
-    color: "rgb(0, 0, 255)",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  }
+    color: 'rgb(0, 0, 255)',
+    legendFontColor: '#7F7F7F',
+    legendFontSize: 15,
+  },
 ];
 ```
 
@@ -368,17 +369,17 @@ This type of graph is often use to display a developer contribution activity. Ho
 
 ```js
 const commitsData = [
-  { date: "2017-01-02", count: 1 },
-  { date: "2017-01-03", count: 2 },
-  { date: "2017-01-04", count: 3 },
-  { date: "2017-01-05", count: 4 },
-  { date: "2017-01-06", count: 5 },
-  { date: "2017-01-30", count: 2 },
-  { date: "2017-01-31", count: 3 },
-  { date: "2017-03-01", count: 2 },
-  { date: "2017-04-02", count: 4 },
-  { date: "2017-03-05", count: 2 },
-  { date: "2017-02-30", count: 4 }
+  {date: '2017-01-02', count: 1},
+  {date: '2017-01-03', count: 2},
+  {date: '2017-01-04', count: 3},
+  {date: '2017-01-05', count: 4},
+  {date: '2017-01-06', count: 5},
+  {date: '2017-01-30', count: 2},
+  {date: '2017-01-31', count: 3},
+  {date: '2017-03-01', count: 2},
+  {date: '2017-04-02', count: 4},
+  {date: '2017-03-05', count: 2},
+  {date: '2017-02-30', count: 4},
 ];
 ```
 
