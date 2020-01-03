@@ -85,6 +85,7 @@ buck-out
 /index.js
 /index.ios.js
 /index.android.js
+/data.ts
 
 # Development files
 /.eslintrc.js
@@ -103,13 +104,30 @@ buck-out
 *.svg
 *.pdf
 
-# # Fonts
+# Fonts
 *.ttf
 *.otf
 
-# # Typescript source files
+# Typescript source files
 *.tsbuildinfo
 *.ts
 *.tsx
 *.map
 !*.d.ts
+
+# Unused dist files
+/dist/App.js
+/dist/App.js.map
+/dist/App.d.ts
+/dist/index.js
+/dist/index.js.map
+/dist/index.d.ts
+/dist/index.ios.js
+/dist/index.ios.js.map
+/dist/index.ios.d.ts
+/dist/index.android.js
+/dist/index.android.js.map
+/dist/index.android.d.ts
+/dist/data.js
+/dist/data.js.map
+/dist/data.d.ts
