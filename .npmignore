@@ -1,4 +1,115 @@
-node_modules/
-.expo/
-npm-debug.*
-/promo
+# OSX
+#
+.DS_Store
+
+build
+
+# Xcode
+#
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IntelliJ
+#
+.idea
+.gradle
+local.properties
+*.iml
+
+# Visual Studio Code
+#
+.vscode
+
+# node.js
+#
+node_modules
+npm-debug.log
+yarn-error.log
+npm-shrinkwrap.json
+.npmignore
+
+# BUCK
+buck-out
+.buckd
+*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
+# Bundle artifact
+*.jsbundle
+
+# Npm pack
+*.tgz
+
+# Jest
+.jest
+/__tests__
+/__mocks__
+/jest-setup
+/jest.config.js
+
+# Git files
+.git
+.gitattributes
+.gitignore
+
+# Demo react native app files
+/android
+/ios
+/.buckconfig
+/.watchmanconfig
+/metro.config.js
+/app.json
+/react-native.config.js
+/babel.config.js
+/App.tsx
+/index.js
+/index.ios.js
+/index.android.js
+
+# Development files
+/.eslintrc.js
+/.prettierrc.js
+/babel.config.js
+/package-lock.json
+/tsconfig.json
+
+# Images
+*.png
+*.gif
+*.tif
+*.tiff
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+
+# # Fonts
+*.ttf
+*.otf
+
+# # Typescript source files
+*.tsbuildinfo
+*.ts
+*.tsx
+*.map
+!*.d.ts

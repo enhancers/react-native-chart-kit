@@ -1,52 +1,66 @@
 {
-  "name": "react-native-chart-kit",
-  "version": "4.3.0",
-  "devDependencies": {
-    "babel-eslint": "10.x",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-polyfill": "^6.26.0",
-    "eslint": "6.x",
-    "eslint-config-react-app": "^5.0.2",
-    "eslint-plugin-flowtype": "^4.3.0",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-jsx-a11y": "6.x",
-    "eslint-plugin-react": "7.x",
-    "eslint-plugin-react-hooks": "1.x",
-    "expo": "35.0.0",
-    "husky": "^3.0.7",
-    "jest-expo": "28.0.0",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "prop-types": "^15.6.2",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
-    "react-native-flash-message": "^0.1.10",
-    "react-native-scrollable-tab-view": "^0.10.0",
-    "react-native-svg": "> 6.4.1",
-    "react-test-renderer": "16.7.0"
+  "name": "react-native-chart-kit-enhanced",
+  "version": "0.1.0-beta.1",
+  "private": false,
+  "license": "MIT",
+  "author": {
+    "email": "info@enhancers.it",
+    "name": "Enhancers Spa.",
+    "url": "https://enhancers.it"
   },
-  "_main": "./node_modules/expo/AppEntry.js",
-  "main": "./index.js",
   "scripts": {
-    "start": "expo start",
-    "eject": "expo eject",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "test": "jest"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "start": "react-native start",
+    "test": "jest --detectOpenHandles",
+    "build": "tsc --project .",
+    "clean": "rimraf dist tsconfig.tsbuildinfo .jest"
   },
-  "jest": {
-    "preset": "jest-expo"
+  "main": "dist/export.js",
+  "types": "dist/export.d.ts",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "paths-js": "^0.4.10",
+    "react-native-flash-message": "^0.1.15",
+    "react-native-svg": "^9.13.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/eslint-config": "0.0.5",
+    "@react-native-community/viewpager": "^2.0.2",
+    "@types/jest": "^24.0.24",
+    "@types/lodash": "^4.14.149",
+    "@types/react-native": "^0.60.25",
+    "@types/react-test-renderer": "16.9.1",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.8.0",
+    "eslint-config-react-app": "^5.1.0",
+    "eslint-plugin-flowtype": "^4.5.2",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^1.11.1",
+    "prop-types": ">= 15.6.0",
+    "react": ">= 16.9.0",
+    "react-native": ">= 0.61.5",
+    "react-native-scrollable-tab-view": "^1.0.0",
+    "react-native-viewpager": "^0.2.13",
+    "react-test-renderer": "16.9.0",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.7.3"
   },
   "peerDependencies": {
-    "prop-types": "> 15.6.0",
-    "react": "> 16.7.0",
-    "react-native": ">= 0.50.0",
-    "react-native-svg": "> 6.4.1"
-  },
-  "dependencies": {
-    "lodash": "^4.17.13",
-    "paths-js": "^0.4.10",
-    "point-in-polygon": "^1.0.1"
+    "prop-types": ">= 15.6.0",
+    "react-native": ">= 0.61.5",
+    "react": ">= 16.9.0"
   },
   "husky": {
     "hooks": {
