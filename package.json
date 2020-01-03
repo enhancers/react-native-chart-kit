@@ -21,9 +21,7 @@
   "types": "dist/export.d.ts",
   "dependencies": {
     "lodash": "^4.17.15",
-    "paths-js": "^0.4.10",
-    "react-native-flash-message": "^0.1.15",
-    "react-native-svg": "^9.13.6"
+    "paths-js": "^0.4.10"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -51,7 +49,9 @@
     "prop-types": ">= 15.6.0",
     "react": ">= 16.9.0",
     "react-native": ">= 0.61.5",
+    "react-native-flash-message": "^0.1.15",
     "react-native-scrollable-tab-view": "^1.0.0",
+    "react-native-svg": "^9.5.0",
     "react-native-viewpager": "^0.2.13",
     "react-test-renderer": "16.9.0",
     "rimraf": "^3.0.0",
@@ -60,6 +60,7 @@
   "peerDependencies": {
     "prop-types": ">= 15.6.0",
     "react-native": ">= 0.61.5",
+    "react-native-svg": "^9.5.0",
     "react": ">= 16.9.0"
   },
   "husky": {
