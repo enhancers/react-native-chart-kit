@@ -207,6 +207,17 @@ export class App extends React.PureComponent {
                 style={graphStyle}
               />
 
+              <Text style={labelStyle}>Bar Graph (Rounded)</Text>
+              <BarChart
+                width={width}
+                height={height}
+                data={data}
+                yAxisLabel="$"
+                chartConfig={{...chartConfig, barRadius: 16}}
+                style={graphStyle}
+                barFull
+              />
+
               <Text style={labelStyle}>Stacked Bar Graph</Text>
               <StackedBarChart
                 style={graphStyle}

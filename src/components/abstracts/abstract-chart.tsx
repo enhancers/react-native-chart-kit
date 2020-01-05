@@ -165,7 +165,7 @@ abstract class ChartComponent<
     return [...new Array(count)].map((_, i) => {
       return (
         <Line
-          key={Math.random()}
+          key={i}
           x1={paddingRight}
           y1={(height / 4) * i + paddingTop}
           x2={width}
@@ -185,7 +185,6 @@ abstract class ChartComponent<
     const {width, height, paddingTop, paddingRight} = config;
     return (
       <Line
-        key={Math.random()}
         x1={paddingRight}
         y1={height - height / 4 + paddingTop}
         x2={width}
@@ -245,7 +244,7 @@ abstract class ChartComponent<
         <Text
           rotation={horizontalLabelRotation}
           origin={`${x}, ${y}`}
-          key={Math.random()}
+          key={i}
           x={x}
           textAnchor="end"
           y={y}
@@ -306,7 +305,7 @@ abstract class ChartComponent<
         <Text
           origin={`${x}, ${y}`}
           rotation={verticalLabelRotation}
-          key={Math.random()}
+          key={i}
           x={x}
           y={y}
           textAnchor={verticalLabelRotation === 0 ? 'middle' : 'start'}
@@ -328,7 +327,7 @@ abstract class ChartComponent<
     return [...new Array(data.length)].map((_, i) => {
       return (
         <Line
-          key={Math.random()}
+          key={i}
           x1={Math.floor(
             ((width - paddingRight) / data.length) * i + paddingRight,
           )}
@@ -352,7 +351,6 @@ abstract class ChartComponent<
 
     return (
       <Line
-        key={Math.random()}
         x1={Math.floor(paddingRight)}
         y1={0}
         x2={Math.floor(paddingRight)}

@@ -106,7 +106,7 @@ export class StackedBarChart<
           0.7;
         ret = ret.concat(
           <Rect
-            key={Math.random()}
+            key={`rec_${i}_${z}`}
             x={xC}
             y={y}
             rx={this.getBarRadius(ret, x)}
@@ -119,7 +119,7 @@ export class StackedBarChart<
         if (!this.props.hideLegend) {
           ret = ret.concat(
             <Text
-              key={Math.random()}
+              key={`tex_${i}_${z}`}
               x={xC + 7 + calculatedBarWidth / 2}
               textAnchor="end"
               y={h > 15 ? y + 15 : y + 7}
@@ -146,7 +146,7 @@ export class StackedBarChart<
 
     return legend.map((x, i) => {
       return (
-        <G key={Math.random()}>
+        <G key={i}>
           <Rect
             width="16px"
             height="16px"
