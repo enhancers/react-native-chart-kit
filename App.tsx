@@ -1,5 +1,4 @@
 // import 'babel-polyfill'; // TODO: Is it needed anymore?
-
 import React from 'react';
 import {
   Dimensions,
@@ -12,10 +11,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import FlashMessage, {showMessage} from 'react-native-flash-message';
-import {Color, LineProps} from 'react-native-svg';
 
 // @ts-ignore: add ambient declaration of untyped module
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+
+import {Color, LineProps} from 'react-native-svg';
 
 import {
   contributionData,
@@ -24,12 +24,15 @@ import {
   progressChartData,
   stackedBarGraphData,
 } from './data';
-import BarChart from './src/components/bar-chart';
-import ContributionGraph from './src/components/contribution-graph';
-import LineChart from './src/components/line-chart';
-import PieChart from './src/components/pie-chart';
-import ProgressChart from './src/components/progress-chart';
-import StackedBarChart from './src/components/stackedbar-chart';
+
+import {
+  BarChart,
+  ContributionGraph,
+  LineChart,
+  PieChart,
+  ProgressChart,
+  StackedBarChart,
+} from './src';
 
 type ConfigList = Array<{
   backgroundColor: string; // Only for wrapper <View>

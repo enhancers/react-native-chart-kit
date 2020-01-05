@@ -15,7 +15,7 @@ const CIRCLE_WIDTH = 16;
 const PADDING_LEFT = 4;
 const CHARACTER_WIDTH = 6;
 
-export const LegendItem: FunctionComponent<LegendItemProps> = props => {
+const LegendItem: FunctionComponent<LegendItemProps> = props => {
   const {baseLegendItemX, index} = props;
   /* half the height of the legend Rect, minus half the height of the circle to align the
      circle from its center, rather than its top. */

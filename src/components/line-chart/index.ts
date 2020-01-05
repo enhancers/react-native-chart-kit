@@ -1,2 +1,6 @@
-export * from './line-chart';
-export {LineChart as default} from './line-chart';
+export {
+  LineChartData,
+  LineChartConfig,
+  LineChartProps,
+  LineChart as default,
+} from './line-chart';

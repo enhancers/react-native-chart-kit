@@ -1,2 +1,6 @@
-export * from './pie-chart';
-export {PieChart as default} from './pie-chart';
+export {
+  PieChartData,
+  PieChartConfig,
+  PieChartProps,
+  PieChart as default,
+} from './PieChart';
