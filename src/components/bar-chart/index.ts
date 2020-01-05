@@ -1,2 +1,1 @@
-export * from './bar-chart';
-export {BarChart as default} from './bar-chart';
+export {BarChartConfig, BarChartProps, BarChart as default} from './BarChart';

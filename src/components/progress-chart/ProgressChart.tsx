@@ -15,7 +15,7 @@ const barWidth: number = 32;
 
 export type ProgressChartData = number[] | {labels?: string[]; data: number[]};
 
-interface ProgressChartConfig extends BaseChartConfig {
+export interface ProgressChartConfig extends BaseChartConfig {
   /**
    * Defines the first color in the linear gradient of a chart's background
    */

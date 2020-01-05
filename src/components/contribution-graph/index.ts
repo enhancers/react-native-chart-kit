@@ -1,2 +1,6 @@
-export * from './contribution-graph';
-export {ContributionGraph as default} from './contribution-graph';
+export {
+  ContributionChartConfig,
+  ContributionValue,
+  ContributionGraphProps,
+  ContributionGraph as default,
+} from './ContributionGraph';

@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {
   Circle,
+  CircleProps,
   Color,
   G,
   Path,
@@ -9,16 +10,15 @@ import {
   Polyline,
   Rect,
   Svg,
-  CircleProps,
 } from 'react-native-svg';
 
+import {ChartData, Dataset} from '../../types';
+import {numericOrDefault} from '../../utils';
 import ChartComponent, {
   BaseChartConfig,
   BaseChartProps,
 } from '../abstracts/abstract-chart';
-import {ChartData, Dataset} from '../../types';
-import {numericOrDefault} from '../../utils';
-import LegendItem from './legend-item';
+import LegendItem from './LegendItem';
 
 export interface LineChartData extends ChartData {
   legend?: string[];
