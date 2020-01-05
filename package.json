@@ -47,11 +47,11 @@
     "prettier": "^1.19.1",
     "pretty-quick": "^1.11.1",
     "prop-types": ">= 15.6.0",
-    "react": ">= 16.9.0",
-    "react-native": ">= 0.61.5",
+    "react": ">= 16.5.0",
+    "react-native": ">= 0.50.0",
     "react-native-flash-message": "^0.1.15",
     "react-native-scrollable-tab-view": "^1.0.0",
-    "react-native-svg": "^9.5.0",
+    "react-native-svg": "> 6.4.1",
     "react-native-viewpager": "^0.2.13",
     "react-test-renderer": "16.9.0",
     "rimraf": "^3.0.0",
@@ -59,9 +59,9 @@
   },
   "peerDependencies": {
     "prop-types": ">= 15.6.0",
-    "react-native": ">= 0.61.5",
-    "react-native-svg": "^9.5.0",
-    "react": ">= 16.9.0"
+    "react-native": ">= 0.50.0",
+    "react-native-svg": "> 6.4.1",
+    "react": ">= 16.5.0"
   },
   "husky": {
     "hooks": {
