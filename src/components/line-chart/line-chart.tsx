@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {
   Circle,
+  CircleProps,
   Color,
   G,
   Path,
@@ -9,16 +10,15 @@ import {
   Polyline,
   Rect,
   Svg,
-  CircleProps,
 } from 'react-native-svg';
 
+import {ChartData, Dataset} from '../../types';
+import {numericOrDefault} from '../../utils';
 import ChartComponent, {
   BaseChartConfig,
   BaseChartProps,
 } from '../abstracts/abstract-chart';
-import {ChartData, Dataset} from '../../types';
-import {numericOrDefault} from '../../utils';
-import LegendItem from './legend-item';
+import LegendItem from './LegendItem';
 
 export interface LineChartData extends ChartData {
   legend?: string[];
@@ -249,23 +249,24 @@ export class LineChart<
         return null;
       },
     } = this.props;
-    data.forEach((dataset: Dataset) => {
-      dataset.data.forEach((x, i) => {
-        if (hidePointsAtIndex.includes(i)) {
+
+    data.forEach((dataset: Dataset, i) => {
+      dataset.data.forEach((x, j) => {
+        if (hidePointsAtIndex.includes(j)) {
           return;
         }
         const cx =
-          paddingRight + (i * (width - paddingRight)) / dataset.data.length;
+          paddingRight + (j * (width - paddingRight)) / dataset.data.length;
         const cy =
           ((baseHeight - this.calcHeight(x, datas, height)) / 4) * 3 +
           paddingTop;
         const onPress = () => {
-          if (!onDataPointClick || hidePointsAtIndex.includes(i)) {
+          if (!onDataPointClick || hidePointsAtIndex.includes(j)) {
             return;
           }
 
           onDataPointClick({
-            index: i,
+            index: j,
             value: x,
             dataset,
             x: cx,
@@ -276,19 +277,19 @@ export class LineChart<
         };
         output.push(
           <Circle
-            key={Math.random()}
+            key={`c1_${i}_${j}`}
             cx={cx}
             cy={cy}
             fill={
               typeof getDotColor === 'function'
-                ? getDotColor(x, i)
+                ? getDotColor(x, j)
                 : LineChart.getColor(this.props, dataset, 0.9)
             }
             onPress={onPress}
-            {...LineChart.getPropsForDots(this.props, x, i)}
+            {...LineChart.getPropsForDots(this.props, x, j)}
           />,
           <Circle
-            key={Math.random()}
+            key={`c2_${i}_${j}`}
             cx={cx}
             cy={cy}
             r="14"
@@ -296,7 +297,7 @@ export class LineChart<
             fillOpacity={0}
             onPress={onPress}
           />,
-          renderDotContent({x: cx, y: cy, index: i}),
+          renderDotContent({x: cx, y: cy, index: j}),
         );
       });
     });
@@ -483,7 +484,7 @@ export class LineChart<
     const baseLegendItemX = width / (legend.length + 1);
 
     return legend.map((legendItem, i) => (
-      <G key={Math.random()}>
+      <G key={i}>
         <LegendItem
           index={i}
           iconColor={LineChart.getColor(this.props, datasets[i], 0.9)}

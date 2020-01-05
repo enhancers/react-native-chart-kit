@@ -1,2 +1,6 @@
-export * from './progress-chart';
-export {ProgressChart as default} from './progress-chart';
+export {
+  ProgressChartData,
+  ProgressChartConfig,
+  ProgressChartProps,
+  ProgressChart as default,
+} from './ProgressChart';

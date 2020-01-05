@@ -15,7 +15,7 @@ const barWidth: number = 32;
 
 export type ProgressChartData = number[] | {labels?: string[]; data: number[]};
 
-interface ProgressChartConfig extends BaseChartConfig {
+export interface ProgressChartConfig extends BaseChartConfig {
   /**
    * Defines the first color in the linear gradient of a chart's background
    */
@@ -99,7 +99,7 @@ export class ProgressChart<
           {pies.map((_, i) => {
             return (
               <Rect
-                key={Math.random()}
+                key={i}
                 width="16px"
                 height="16px"
                 fill={this.props.chartConfig.color(0.2 * (i + 1), i)}
@@ -119,7 +119,7 @@ export class ProgressChart<
           {pies.map((_, i) => {
             return (
               <Text
-                key={Math.random()}
+                key={i}
                 x={this.props.width / 2.5}
                 y={
                   -(this.props.height / 2.5) +
@@ -176,7 +176,7 @@ export class ProgressChart<
               {pieBackgrounds.map((pie, i) => {
                 return (
                   <Path
-                    key={Math.random()}
+                    key={i}
                     d={pie.curves[0].sector.path.print()}
                     strokeWidth={16}
                     stroke={this.props.chartConfig.color(0.2, i)}
@@ -188,7 +188,7 @@ export class ProgressChart<
               {pies.map((pie, i) => {
                 return (
                   <Path
-                    key={Math.random()}
+                    key={i}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     d={pie.curves[0].sector.path.print()}
