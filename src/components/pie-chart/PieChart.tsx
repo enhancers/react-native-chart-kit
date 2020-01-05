@@ -100,7 +100,7 @@ export class PieChart<
       }
 
       return (
-        <G key={Math.random()}>
+        <G key={i}>
           <Path d={c.sector.path.print()} fill={c.item.color} />
           {hasLegend ? (
             <Rect

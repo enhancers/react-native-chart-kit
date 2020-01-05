@@ -2,12 +2,13 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Color, G, Rect, Svg} from 'react-native-svg';
 
+import {ChartData} from '../../types';
+import {numericOrDefault} from '../../utils';
 import ChartComponent, {
   BaseChartConfig,
   BaseChartProps,
 } from '../abstracts/abstract-chart';
-import {ChartData} from '../../types';
-import {numericOrDefault} from '../../utils';
+import Bar from '../commons/Bar';
 
 const barWidth: number = 32;
 
@@ -34,6 +35,8 @@ export interface BarChartConfig extends BaseChartConfig {
   backgroundGradientToOpacity?: number;
   fillShadowGradient?: Color;
   fillShadowGradientOpacity?: number;
+
+  barRadius?: number;
 }
 
 export interface BarChartProps extends BaseChartProps<BarChartConfig> {
@@ -44,10 +47,14 @@ export interface BarChartProps extends BaseChartProps<BarChartConfig> {
   horizontalLabelRotation?: number;
   withInnerLines?: boolean;
 
+  barFull?: boolean;
+
   // fromZero?: boolean;
   // yAxisLabel: string;
   // yAxisSuffix: string;
 }
+
+const barTopsHeight: number = 2;
 
 export class BarChart<
   ChartProps extends BarChartProps = BarChartProps
@@ -75,24 +82,38 @@ export class BarChart<
     const baseHeight = this.calcBaseHeight(data, height);
 
     return data.map((x, i) => {
+      if (x === 0) {
+        return null;
+      }
+
       const barHeight = this.calcHeight(x, data, height);
+      const {chartConfig} = this.props;
+      let {barRadius = 0} = chartConfig;
+
       const calculatedBarWidth =
-        barWidth * BarChart.getBarPercentage(this.props.chartConfig);
+        barWidth * BarChart.getBarPercentage(chartConfig);
+
+      const startX =
+        paddingRight +
+        (i * (width - paddingRight)) / data.length +
+        calculatedBarWidth / 2;
+
+      const startY =
+        ((barHeight > 0 ? baseHeight - barHeight : baseHeight) / 4) * 3 +
+        paddingTop;
+
+      const calculatedBarHeight = (Math.abs(barHeight) / 4) * 3;
+
       return (
-        <Rect
-          key={Math.random()}
-          x={
-            paddingRight +
-            (i * (width - paddingRight)) / data.length +
-            calculatedBarWidth / 2
-          }
-          y={
-            ((barHeight > 0 ? baseHeight - barHeight : baseHeight) / 4) * 3 +
-            paddingTop
-          }
+        <Bar
+          key={i}
           width={calculatedBarWidth}
-          height={(Math.abs(barHeight) / 4) * 3}
+          height={calculatedBarHeight}
           fill="url(#fillShadowGradient)"
+          startX={startX}
+          startY={startY}
+          barRadius={barRadius}
+          isNegative={x < 0}
         />
       );
     });
@@ -105,6 +126,10 @@ export class BarChart<
     paddingTop: number;
     paddingRight: number;
   }): React.ReactNode {
+    if (this.props.barFull) {
+      return null;
+    }
+
     const {data, width, height, paddingTop, paddingRight} = config;
     const baseHeight = this.calcBaseHeight(data, height);
 
@@ -114,7 +139,7 @@ export class BarChart<
         barWidth * BarChart.getBarPercentage(this.props.chartConfig);
       return (
         <Rect
-          key={Math.random()}
+          key={i}
           x={
             paddingRight +
             (i * (width - paddingRight)) / data.length +
@@ -122,7 +147,7 @@ export class BarChart<
           }
           y={((baseHeight - barHeight) / 4) * 3 + paddingTop}
           width={calculatedBarWidth}
-          height={2}
+          height={barTopsHeight}
           fill={this.props.chartConfig.color(0.6)}
         />
       );
@@ -218,6 +243,7 @@ export class BarChart<
               paddingRight,
             })}
           </G>
+          {/* {!barFull && ( */}
           <G>
             {this.renderBarTops({
               width,
@@ -227,6 +253,7 @@ export class BarChart<
               paddingRight,
             })}
           </G>
+          {/* )} */}
         </Svg>
       </View>
     );
