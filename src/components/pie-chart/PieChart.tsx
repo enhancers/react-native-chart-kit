@@ -46,6 +46,8 @@ export interface PieChartProps extends BaseChartProps<PieChartConfig> {
   data: PieChartData[];
   accessor: string;
 
+  arcsOnly?: boolean | null;
+
   // backgroundColor: string;
   // paddingLeft: string; // TODO: fix (moved to chartConfig)
 }
@@ -86,53 +88,69 @@ export class PieChart<
       );
     }, 0);
 
-    const slices = curves.map((c, i) => {
-      let value;
+    const slices = (this.props.arcsOnly ? curves.slice(0, 1) : curves).map(
+      (c, i) => {
+        console.log('pie', c.sector.path.instructions());
+        let value;
 
-      if (absolute) {
-        value = c.item[this.props.accessor];
-      } else {
-        if (total === 0) {
-          value = 0 + '%';
+        if (absolute) {
+          value = c.item[this.props.accessor];
         } else {
-          value = Math.round((100 / total) * c.item[this.props.accessor]) + '%';
+          if (total === 0) {
+            value = 0 + '%';
+          } else {
+            value =
+              Math.round((100 / total) * c.item[this.props.accessor]) + '%';
+          }
         }
-      }
 
-      return (
-        <G key={i}>
-          <Path d={c.sector.path.print()} fill={c.item.color} />
-          {hasLegend ? (
-            <Rect
-              width="16px"
-              height="16px"
-              fill={c.item.color}
-              rx={8}
-              ry={8}
-              x={this.props.width / 2.5 - 24}
-              y={
-                -(this.props.height / 2.5) +
-                ((this.props.height * 0.8) / this.props.data.length) * i +
-                12
-              }
-            />
-          ) : null}
-          {hasLegend ? (
-            <Text
-              fill={c.item.legendFontColor}
-              fontSize={c.item.legendFontSize}
-              x={this.props.width / 2.5}
-              y={
-                -(this.props.height / 2.5) +
-                ((this.props.height * 0.8) / this.props.data.length) * i +
-                12 * 2
-              }>
-              {`${value} ${c.item.name}`}
-            </Text>
-          ) : null}
-        </G>
-      );
-    });
+        return (
+          <G key={i}>
+            {!this.props.arcsOnly && (
+              <Path d={c.sector.path.print()} fill={c.item.color} />
+            )}
+            {this.props.arcsOnly && (
+              <Path
+                key={i}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d={c.sector.path.print()}
+                strokeWidth={16}
+                stroke={c.item.color}
+              />
+            )}
+            {hasLegend ? (
+              <Rect
+                width="16px"
+                height="16px"
+                fill={c.item.color}
+                rx={8}
+                ry={8}
+                x={this.props.width / 2.5 - 24}
+                y={
+                  -(this.props.height / 2.5) +
+                  ((this.props.height * 0.8) / this.props.data.length) * i +
+                  12
+                }
+              />
+            ) : null}
+            {hasLegend ? (
+              <Text
+                fill={c.item.legendFontColor}
+                fontSize={c.item.legendFontSize}
+                x={this.props.width / 2.5}
+                y={
+                  -(this.props.height / 2.5) +
+                  ((this.props.height * 0.8) / this.props.data.length) * i +
+                  12 * 2
+                }>
+                {`${value} ${c.item.name}`}
+              </Text>
+            ) : null}
+          </G>
+        );
+      },
+    );
 
     return (
       <View

@@ -176,13 +176,15 @@ export class App extends React.PureComponent {
                 chartConfig={chartConfig}
                 style={graphStyle}
                 verticalLabelRotation={20}
-                onDataPointClick={({value, getColor}) =>
+                onDataPointClick={({value, getColor}) => {
+                  console.log('Clicked!');
+                  // TODO: Fix (Not working on Android )
                   showMessage({
                     message: `${value}`,
                     description: 'You selected this value',
                     backgroundColor: getColor(0.9),
-                  })
-                }
+                  });
+                }}
                 formatXLabel={label => label.toUpperCase()}
               />
               <FlashMessage duration={1000} />
@@ -235,6 +237,17 @@ export class App extends React.PureComponent {
                 chartConfig={chartConfig}
                 accessor="population"
                 style={[graphStyle, styles.pieChartSpacing]}
+              />
+
+              <Text style={labelStyle}>Pie Chart (Arcs Only)</Text>
+              <PieChart
+                data={pieChartData}
+                height={height}
+                width={width}
+                chartConfig={chartConfig}
+                accessor="population"
+                style={[graphStyle, styles.pieChartSpacing]}
+                arcsOnly
               />
 
               <Text style={labelStyle}>Line Chart</Text>

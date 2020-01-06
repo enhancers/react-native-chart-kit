@@ -186,6 +186,10 @@ export class ProgressChart<
             </G>
             <G>
               {pies.map((pie, i) => {
+                console.log(
+                  'progress',
+                  pie.curves[0].sector.path.instructions(),
+                );
                 return (
                   <Path
                     key={i}

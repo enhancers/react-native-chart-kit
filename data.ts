@@ -54,7 +54,7 @@ const pieChartData = [
   {
     name: 'Beijing',
     population: 527612,
-    color: 'red',
+    color: 'green',
     legendFontColor: '#7F7F7F',
     legendFontSize: 15,
   },

@@ -10,3 +10,5 @@ export * from './progress-chart';
 export {default as ProgressChart} from './progress-chart';
 export * from './stacked-bar-chart';
 export {default as StackedBarChart} from './stacked-bar-chart';
+
+// NOTE: Do not export abstracts or commons outside this npm package (to be used only internally)
