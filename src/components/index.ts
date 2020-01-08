@@ -1,5 +1,7 @@
 export * from './bar-chart';
+export * from './grouped-bar-chart';
 export {default as BarChart} from './bar-chart';
+export {default as GroupedBarChart} from './grouped-bar-chart';
 export * from './contribution-graph';
 export {default as ContributionGraph} from './contribution-graph';
 export * from './line-chart';

@@ -23,6 +23,7 @@ import {
   pieChartData,
   progressChartData,
   stackedBarGraphData,
+  groupedData,
 } from './data';
 
 import {
@@ -32,6 +33,7 @@ import {
   PieChart,
   ProgressChart,
   StackedBarChart,
+  GroupedBarChart,
 } from './src';
 
 type ConfigList = Array<{
@@ -216,6 +218,16 @@ export class App extends React.PureComponent {
                 chartConfig={{...chartConfig, barRadius: 16}}
                 style={graphStyle}
                 barFull
+              />
+
+              <Text style={labelStyle}>Grouped Bar Graph</Text>
+              <GroupedBarChart
+                width={width}
+                height={height}
+                data={groupedData}
+                yAxisLabel="$"
+                chartConfig={chartConfig}
+                style={graphStyle}
               />
 
               <Text style={labelStyle}>Stacked Bar Graph</Text>

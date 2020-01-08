@@ -1,6 +1,16 @@
+import {
+  LineChartData,
+  ContributionValue,
+  PieChartData,
+  ProgressChartData,
+  StackedBarChartData,
+  ChartData,
+  Dataset,
+} from 'src';
+
 // Mock data object used for LineChart and BarChart
 
-const data = {
+export const data: LineChartData = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June'],
   datasets: [
     {
@@ -18,9 +28,38 @@ const data = {
   legend: ['Rainy Days', 'Sunny Days', 'Snowy Days'], // optional
 };
 
+export const groupedData: ChartData<Dataset<number[]>> = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+  datasets: [
+    {
+      data: [
+        [-50, -25],
+        [-4, 86],
+        [71, 100],
+      ],
+      color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+    },
+    {
+      data: [
+        [20, 10],
+        [4, 56],
+        [87, 90],
+      ],
+      color: (opacity = 1) => `rgba(0, 255, 255, ${opacity})`, // optional
+    },
+    {
+      data: [
+        [30, 90],
+        [67, 54],
+        [10, 2],
+      ],
+    },
+  ],
+};
+
 // Mock data object used for Contribution Graph
 
-const contributionData = [
+export const contributionData: ContributionValue[] = [
   {date: '2016-01-02', count: 1},
   {date: '2016-01-03', count: 2},
   {date: '2016-01-04', count: 3},
@@ -36,7 +75,7 @@ const contributionData = [
 
 // Mock data object for Pie Chart
 
-const pieChartData = [
+export const pieChartData: (PieChartData & {population: number})[] = [
   {
     name: 'Seoul',
     population: 21500000,
@@ -76,12 +115,12 @@ const pieChartData = [
 
 // Mock data object for Progress
 
-const progressChartData = {
+export const progressChartData: ProgressChartData = {
   labels: ['Swim', 'Bike', 'Run'], // optional
   data: [0.2, 0.5, 0.3],
 };
 
-const stackedBarGraphData = {
+export const stackedBarGraphData: StackedBarChartData = {
   labels: ['Test1', 'Test2'],
   legend: ['L1', 'L2', 'L3'],
   data: [
@@ -89,12 +128,4 @@ const stackedBarGraphData = {
     [30, 30, 60],
   ],
   barColors: ['#dfe4ea', '#ced6e0', '#a4b0be'],
-};
-
-export {
-  data,
-  contributionData,
-  pieChartData,
-  progressChartData,
-  stackedBarGraphData,
 };

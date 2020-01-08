@@ -20,7 +20,7 @@ import ChartComponent, {
 } from '../abstracts/abstract-chart';
 import LegendItem from './LegendItem';
 
-export interface LineChartData extends ChartData {
+export interface LineChartData extends ChartData<Dataset<number>> {
   legend?: string[];
 }
 
