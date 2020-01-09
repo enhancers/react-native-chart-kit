@@ -49,7 +49,6 @@ export interface BarChartProps extends BaseChartProps<BarChartConfig> {
 
   barFull?: boolean;
 
-  // fromZero?: boolean;
   // yAxisLabel: string;
   // yAxisSuffix: string;
 }

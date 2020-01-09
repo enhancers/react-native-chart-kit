@@ -89,7 +89,6 @@ export interface LineChartProps extends BaseChartProps<LineChartConfig> {
   /**
    * Render charts from 0 not from the minimum value. - default: False.
    */
-  fromZero?: boolean;
   /**
    * Configuration object for the chart, see example:
    *

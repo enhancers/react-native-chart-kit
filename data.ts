@@ -1,12 +1,11 @@
 import {
-  LineChartData,
   ContributionValue,
+  LineChartData,
   PieChartData,
   ProgressChartData,
   StackedBarChartData,
-  ChartData,
-  Dataset,
 } from 'src';
+import {GroupedBarChartData} from 'src/components/grouped-bar-chart/GroupedBarChart';
 
 // Mock data object used for LineChart and BarChart
 
@@ -28,31 +27,26 @@ export const data: LineChartData = {
   legend: ['Rainy Days', 'Sunny Days', 'Snowy Days'], // optional
 };
 
-export const groupedData: ChartData<Dataset<number[]>> = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+export const groupedData: GroupedBarChartData = {
+  labels: ['Chocolate', 'Vanilla', 'Strawberry'],
   datasets: [
     {
-      data: [
-        [-50, -25],
-        [-4, 86],
-        [71, 100],
-      ],
-      color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+      legend: 'Blue',
+      fillShadowGradientFrom: 'blue',
+      fillShadowGradientTo: 'blue',
+      data: [3, 7, 4],
     },
     {
-      data: [
-        [20, 10],
-        [4, 56],
-        [87, 90],
-      ],
-      color: (opacity = 1) => `rgba(0, 255, 255, ${opacity})`, // optional
+      legend: 'Red',
+      fillShadowGradientFrom: 'red',
+      fillShadowGradientTo: 'red',
+      data: [4, 3, 5],
     },
     {
-      data: [
-        [30, 90],
-        [67, 54],
-        [10, 2],
-      ],
+      legend: 'Green',
+      fillShadowGradientFrom: 'green',
+      fillShadowGradientTo: 'green',
+      data: [7, 2, 6],
     },
   ],
 };

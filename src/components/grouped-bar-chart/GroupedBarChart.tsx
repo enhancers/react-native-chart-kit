@@ -3,7 +3,6 @@ import {StyleSheet, View} from 'react-native';
 import {Color, G, Rect, Svg} from 'react-native-svg';
 import _ from 'lodash';
 
-import {ChartData, Dataset} from '../../types';
 import {numericOrDefault} from '../../utils';
 import ChartComponent, {
   BaseChartConfig,
@@ -12,6 +11,18 @@ import ChartComponent, {
 import Bar from '../commons/Bar';
 
 const barWidth: number = 32;
+
+export interface GroupedBarChartDataSet {
+  legend?: string;
+  fillShadowGradientFrom?: Color;
+  fillShadowGradientTo?: Color;
+  data: number[];
+}
+
+export interface GroupedBarChartData {
+  labels?: string[];
+  datasets: GroupedBarChartDataSet[];
+}
 
 export interface GroupedBarChartConfig extends BaseChartConfig {
   /**
@@ -42,7 +53,7 @@ export interface GroupedBarChartConfig extends BaseChartConfig {
 
 export interface GroupedBarChartProps
   extends BaseChartProps<GroupedBarChartConfig> {
-  data: ChartData<Dataset<number[]>>;
+  data: GroupedBarChartData;
   withHorizontalLabels?: boolean;
   withVerticalLabels?: boolean;
   verticalLabelRotation?: number;
@@ -51,7 +62,6 @@ export interface GroupedBarChartProps
 
   barFull?: boolean;
 
-  // fromZero?: boolean;
   // yAxisLabel: string;
   // yAxisSuffix: string;
 }
@@ -65,14 +75,11 @@ export class GroupedBarChart<
     super(props);
   }
 
-  protected static getBarPercentage = (chartConfig: GroupedBarChartConfig) => {
-    const {barPercentage = 1} = chartConfig;
-
-    return barPercentage;
-  };
+  protected static getBarPercentage = (chartConfig: GroupedBarChartConfig) =>
+    chartConfig.barPercentage ?? 1;
 
   protected renderBars(config: {
-    data: number[];
+    datasets: GroupedBarChartDataSet[];
     width: number;
     height: number;
     verticalLabelRotation: number;
@@ -80,49 +87,61 @@ export class GroupedBarChart<
     paddingTop: number;
     paddingRight: number;
   }): React.ReactNode {
-    const {data, width, height, paddingTop, paddingRight} = config;
-    const baseHeight = this.calcBaseHeight(data, height);
+    const {datasets, width, height, paddingTop, paddingRight} = config;
+    const baseHeight = this.calcBaseHeight(
+      _.flatten(datasets.map(ds => ds.data)),
+      height,
+    );
 
-    return data.map((x, i) => {
-      if (x === 0) {
+    return datasets.map((x, i) => {
+      if (!(x.data && x.data.length > 0)) {
         return null;
       }
 
-      const barHeight = this.calcHeight(x, data, height);
-      const {chartConfig} = this.props;
-      let {barRadius = 0} = chartConfig;
-
-      const calculatedBarWidth =
-        barWidth * GroupedBarChart.getBarPercentage(chartConfig);
-
-      const startX =
-        paddingRight +
-        (i * (width - paddingRight)) / data.length +
-        calculatedBarWidth / 2;
-
-      const startY =
-        ((barHeight > 0 ? baseHeight - barHeight : baseHeight) / 4) * 3 +
-        paddingTop;
-
-      const calculatedBarHeight = (Math.abs(barHeight) / 4) * 3;
+      const datasetLen = x.data.length;
 
       return (
-        <Bar
-          key={i}
-          width={calculatedBarWidth}
-          height={calculatedBarHeight}
-          fill="url(#fillShadowGradient)"
-          startX={startX}
-          startY={startY}
-          barRadius={barRadius}
-          isNegative={x < 0}
-        />
+        <G key={i}>
+          {x.data.map((d, j) => {
+            const barHeight = this.calcHeight(d, x.data, height);
+            const {chartConfig} = this.props;
+            let {barRadius = 0} = chartConfig;
+
+            const calculatedBarWidth =
+              barWidth * GroupedBarChart.getBarPercentage(chartConfig);
+
+            const startX =
+              paddingRight +
+              (i * (width - paddingRight)) / datasets.length +
+              calculatedBarWidth / 2 +
+              calculatedBarWidth * j;
+
+            const startY =
+              ((barHeight > 0 ? baseHeight - barHeight : baseHeight) / 4) * 3 +
+              paddingTop;
+
+            const calculatedBarHeight = (Math.abs(barHeight) / 4) * 3;
+
+            return (
+              <Bar
+                key={j}
+                width={calculatedBarWidth}
+                height={calculatedBarHeight}
+                fill="url(#fillShadowGradient)"
+                startX={startX}
+                startY={startY}
+                barRadius={barRadius}
+                isNegative={d < 0}
+              />
+            );
+          })}
+        </G>
       );
     });
   }
 
   protected renderBarTops(config: {
-    data: number[];
+    datasets: GroupedBarChartDataSet[];
     width: number;
     height: number;
     paddingTop: number;
@@ -132,26 +151,35 @@ export class GroupedBarChart<
       return null;
     }
 
-    const {data, width, height, paddingTop, paddingRight} = config;
-    const baseHeight = this.calcBaseHeight(data, height);
+    const {datasets, width, height, paddingTop, paddingRight} = config;
 
-    return data.map((x, i) => {
-      const barHeight = this.calcHeight(x, data, height);
-      const calculatedBarWidth =
-        barWidth * GroupedBarChart.getBarPercentage(this.props.chartConfig);
+    return datasets.map((x, i) => {
+      const baseHeight = this.calcBaseHeight(x.data, height);
+
       return (
-        <Rect
-          key={i}
-          x={
-            paddingRight +
-            (i * (width - paddingRight)) / data.length +
-            calculatedBarWidth / 2
-          }
-          y={((baseHeight - barHeight) / 4) * 3 + paddingTop}
-          width={calculatedBarWidth}
-          height={barTopsHeight}
-          fill={this.props.chartConfig.color(0.6)}
-        />
+        <G key={i}>
+          {x.data.map((d, j) => {
+            const barHeight = this.calcHeight(d, x.data, height);
+            const calculatedBarWidth =
+              barWidth *
+              GroupedBarChart.getBarPercentage(this.props.chartConfig);
+            return (
+              <Rect
+                key={j}
+                x={
+                  paddingRight +
+                  (i * (width - paddingRight)) / datasets.length +
+                  calculatedBarWidth / 2 +
+                  calculatedBarWidth * j
+                }
+                y={((baseHeight - barHeight) / 4) * 3 + paddingTop}
+                width={calculatedBarWidth}
+                height={barTopsHeight}
+                fill={this.props.chartConfig.color(0.6)}
+              />
+            );
+          })}
+        </G>
       );
     });
   }
@@ -240,7 +268,7 @@ export class GroupedBarChart<
               height,
               verticalLabelRotation,
               horizontalLabelRotation,
-              data: _.flatten(data.datasets[0].data), // TODO: remove flatten
+              datasets: data.datasets, // TODO: remove flatten
               paddingTop,
               paddingRight,
             })}
@@ -250,7 +278,7 @@ export class GroupedBarChart<
             {this.renderBarTops({
               width,
               height,
-              data: _.flatten(data.datasets[0].data), // TODO: remove flatten
+              datasets: data.datasets, // TODO: remove flatten
               paddingTop,
               paddingRight,
             })}

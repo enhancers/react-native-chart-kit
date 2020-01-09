@@ -226,8 +226,10 @@ export class App extends React.PureComponent {
                 height={height}
                 data={groupedData}
                 yAxisLabel="$"
-                chartConfig={chartConfig}
+                chartConfig={{...chartConfig, barRadius: 16}}
                 style={graphStyle}
+                barFull
+                fromZero
               />
 
               <Text style={labelStyle}>Stacked Bar Graph</Text>
