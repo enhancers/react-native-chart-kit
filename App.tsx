@@ -135,7 +135,7 @@ const configList: ConfigList = [
     chartConfig: {
       backgroundGradientFrom: '#ff3e03',
       backgroundGradientTo: '#ff3e03',
-      color: (opacity = 1) => `rgba(${0}, ${0}, ${0}, ${opacity})`,
+      color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     },
   },
 ];
@@ -226,9 +226,10 @@ export class App extends React.PureComponent {
                 height={height}
                 data={groupedData}
                 yAxisLabel="$"
-                chartConfig={{...chartConfig, barRadius: 16}}
+                chartConfig={chartConfig}
+                // chartConfig={{...chartConfig, barRadius: 16}}
                 style={graphStyle}
-                barFull
+                // barFull
                 fromZero
               />
 

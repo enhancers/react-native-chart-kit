@@ -10,12 +10,14 @@ import ChartComponent, {
 } from '../abstracts/abstract-chart';
 import Bar from '../commons/Bar';
 
-const barWidth: number = 32;
+// const barWidth: number = 32; // TODO: make 32 default and add option to change it
+const barWidth: number = 16;
+const groupInternalSpace: number = 2; // TODO: option to change it
 
 export interface GroupedBarChartDataSet {
   legend?: string;
-  fillShadowGradientFrom?: Color;
-  fillShadowGradientTo?: Color;
+  fillShadowGradientFrom?: (opacity?: number) => string;
+  fillShadowGradientTo?: (opacity?: number) => string;
   data: number[];
 }
 
@@ -99,6 +101,9 @@ export class GroupedBarChart<
       }
 
       const datasetLen = x.data.length;
+      const color =
+        (x.fillShadowGradientFrom && x.fillShadowGradientFrom(0.6)) ||
+        'url(#fillShadowGradient)';
 
       return (
         <G key={i}>
@@ -112,9 +117,14 @@ export class GroupedBarChart<
 
             const startX =
               paddingRight +
-              (i * (width - paddingRight)) / datasets.length +
+              (i *
+                (width -
+                  paddingRight -
+                  groupInternalSpace * (datasets.length - 1))) /
+                datasets.length +
               calculatedBarWidth / 2 +
-              calculatedBarWidth * j;
+              calculatedBarWidth * j +
+              (j > 0 ? groupInternalSpace : 0);
 
             const startY =
               ((barHeight > 0 ? baseHeight - barHeight : baseHeight) / 4) * 3 +
@@ -127,7 +137,7 @@ export class GroupedBarChart<
                 key={j}
                 width={calculatedBarWidth}
                 height={calculatedBarHeight}
-                fill="url(#fillShadowGradient)"
+                fill={color}
                 startX={startX}
                 startY={startY}
                 barRadius={barRadius}
@@ -155,6 +165,9 @@ export class GroupedBarChart<
 
     return datasets.map((x, i) => {
       const baseHeight = this.calcBaseHeight(x.data, height);
+      const color =
+        (x.fillShadowGradientFrom && x.fillShadowGradientFrom(0.6)) ||
+        this.props.chartConfig.color(0.6);
 
       return (
         <G key={i}>
@@ -168,9 +181,14 @@ export class GroupedBarChart<
                 key={j}
                 x={
                   paddingRight +
-                  (i * (width - paddingRight)) / datasets.length +
+                  (i *
+                    (width -
+                      paddingRight -
+                      groupInternalSpace * (datasets.length - 1))) /
+                    datasets.length +
                   calculatedBarWidth / 2 +
-                  calculatedBarWidth * j
+                  calculatedBarWidth * j +
+                  (j > 0 ? groupInternalSpace : 0)
                 }
                 y={((baseHeight - barHeight) / 4) * 3 + paddingTop}
                 width={calculatedBarWidth}

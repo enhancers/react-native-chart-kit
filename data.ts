@@ -28,25 +28,19 @@ export const data: LineChartData = {
 };
 
 export const groupedData: GroupedBarChartData = {
-  labels: ['Chocolate', 'Vanilla', 'Strawberry'],
+  labels: ['Chocolate', 'Vanilla', 'Strawberry', 'Cookie', 'Marshmallow'],
   datasets: [
     {
       legend: 'Blue',
-      fillShadowGradientFrom: 'blue',
-      fillShadowGradientTo: 'blue',
-      data: [3, 7, 4],
+      fillShadowGradientFrom: (opacity = 1) => `rgba(36, 53, 158, ${opacity})`,
+      fillShadowGradientTo: (opacity = 1) => `rgba(36, 53, 158, ${opacity})`,
+      data: [3, 7, 1, 6, 2],
     },
     {
       legend: 'Red',
-      fillShadowGradientFrom: 'red',
-      fillShadowGradientTo: 'red',
-      data: [4, 3, 5],
-    },
-    {
-      legend: 'Green',
-      fillShadowGradientFrom: 'green',
-      fillShadowGradientTo: 'green',
-      data: [7, 2, 6],
+      fillShadowGradientFrom: (opacity = 1) => `rgba(158, 36, 36, ${opacity})`,
+      fillShadowGradientTo: (opacity = 1) => `rgba(158, 36, 36, ${opacity})`,
+      data: [4, 3, 9, 5, 4],
     },
   ],
 };
